@@ -1,63 +1,222 @@
+/* General body styles */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
 }
 
+/* Interactive Navbar */
 header {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2196F3; /* Navbar background color */
 }
 
-header h1 {
-  margin: 0;
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 nav ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 nav ul li {
-  display: inline;
-  margin: 0 10px;
+    margin-left: 20px;
 }
 
 nav ul li a {
-  color: white;
-  text-decoration: none;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #90CAF9; /* Lighter blue on hover */
+}
+
+/* Burger icon for mobile */
+.burger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.burger div {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Animation for burger icon when opened */
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+    opacity: 0;
+}
+
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Responsive Navbar (Mobile) */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        z-index: 10;
+        top: 80px;
+        right: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: #2196F3;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateX(100%);
+        transition: transform 0.5s ease;
+    }
+
+    nav ul li {
+        margin: 20px 0;
+    }
+
+    nav.active ul {
+        transform: translateX(0);
+    }
+
+    .burger {
+        display: flex;
+    }
 }
 
 section {
-  padding: 2rem;
-  margin: 1rem auto;
-  max-width: 800px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 20px;
 }
 
-h2 {
-  margin-top: 0;
+/* Skills section with interactive badges */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
 }
 
-#projects-container {
-  display: flex;
-  flex-wrap: wrap;
+.skill-badge {
+    width: 150px;
+    height: 150px;
+    background-color: #64B5F6; /* Badge background */
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: transform 0.3s ease;
 }
 
-.project {
-  background-color: #eaeaea;
-  border-radius: 8px;
-  margin: 1rem;
-  padding: 1rem;
-  flex: 1 1 calc(33% - 2rem);
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+.skill-badge:hover {
+    transform: rotateY(180deg);
 }
 
-.project h3 {
-  margin-top: 0;
+.skill-badge-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.skill-badge-front {
+    background-color: #64B5F6; /* Front side of badge */
+}
+
+.skill-badge-back {
+    background-color: #2196F3; /* Back side of badge */
+    transform: rotateY(180deg);
+}
+
+.skill-badge:hover .skill-badge-inner {
+    background-color: #1E88E5; /* Slightly darker on hover */
+}
+
+/* Popup for additional skill information */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Popup skill information text */
+#skill-info-text {
+    font-size: 1.4em;
+}
+
+/* Projects Section */
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #fff;
+    border: 1px solid #BBDEFB; /* Light blue card border */
+    padding: 20px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: #64B5F6; /* Border on hover */
 }

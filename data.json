@@ -1,0 +1,40 @@
+{
+    "meta": {
+      "description": "An interactive portfolio showcasing web development projects.",
+      "author": "malivinayak",
+      "keywords": ["portfolio", "web development", "projects", "skills"],
+      "logo": "images/profile.png"
+    },
+    "about": [
+    "Hi! I'm a first year MTech student majoring in Artificial Intelligence @IITKGP. A keen learner, I'm interested in Data Structures and Algorithms, and Web Development. Open to exploring new fields, I hope to work on projects that impact those around me in a positive way.",
+    "• Known for my self-projects and ability to process many ongoing tasks while always maintaining a calm presence and ability to prioritize well under pressure",
+    "• Experienced in Object-oriented programming, data structure and algorithm",
+    "• Quick learn and master in new technologies; successful working in both team and self-directed settings."
+  ],
+    "projects": [
+      {
+        "title": "Interactive Puzzle Game",
+        "description": "A fun game built with JavaScript and CSS animations.",
+        "link": "https://example.com/project1"
+      },
+      {
+        "title": "E-commerce Platform",
+        "description": "A responsive e-commerce site with a custom-built backend.",
+        "link": "https://example.com/project2"
+      }
+    ],
+    "skills": [
+      { "name": "JavaScript", "description": "Expert in writing complex JS applications." },
+      { "name": "CSS", "description": "Experienced in creating responsive and flexible layouts." },
+      { "name": "React", "description": "Proficient in building component-based web applications." }
+    ],
+    "contact": {
+      "email": "malivinayak.24@kgpian.iitkgp.ac.in",
+      "socialMedia": {
+        "github": "https://github.com/malivinayak",
+        "youtube": "https://youtube.com/@malivinayak",
+        "linkedin": "https://linkedin.com/in/malivinayak"
+        }
+    }
+  }
+  

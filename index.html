@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vinayak Mali</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" id="meta-description">
+    <meta name="author" content="" id="meta-author">
+    <meta name="keywords" content="" id="meta-keywords">
+    <link id="favicon" rel="icon" href="" type="image/png">
+    <!-- Open Graph tags for social media sharing -->
+    <meta property="og:image" content="">
+    <meta property="og:title" content="Your Website Title">
+    <meta property="og:description" content="Your description here.">
+    <title>malivinayak</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Vinayak Mali</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#extracurricular">Extracurricular</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I am Vinayak Mali, currently pursuing my M.Tech in Artificial Intelligence at IIT Kharagpur.</p>
-  </section>
+    <header>
+        <div class="logo">
+            <img src="images/profile.png" alt="Profile Logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div id="projects-container"></div>
-  </section>
+    <section id="about">
+        <h2>About Me</h2>
+        <p id="about-text"></p>
+    </section>
 
-  <section id="skills">
-    <h2>Technical Skills</h2>
-    <ul>
-      <li>Python, C, C++, Java, Bash, HTML, CSS, JavaScript, SQL, NoSQL</li>
-      <li>React.js, Vue.js, Flask, Spring Boot, Express.js, PyTorch, Tailwind, Node.js, Android SDK, Git, GitHub</li>
-    </ul>
-  </section>
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-cards" id="projects-list"></div>
+    </section>
 
-  <section id="extracurricular">
-    <h2>Extracurricular Activities</h2>
-    <ul>
-      <li>CTB Design Verification Hackathon - Excellent Category</li>
-      <li>Mixed Signal Marathon - Excellent Category</li>
-      <li>Project Based Learning (PBL) Winner in 2022-23</li>
-      <li>Navapravartya-2K21 - Runner Up</li>
-      <li>Abhivyakti-2K21 - Runner Up</li>
-    </ul>
-  </section>
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container" id="skills-list"></div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li><a href="https://malivinayak.com">Website</a></li>
-      <li><a href="https://www.linkedin.com/in/malivinayak">LinkedIn</a></li>
-      <li><a href="https://github.com/malivinayak">GitHub</a></li>
-    </ul>
-  </section>
+    <div id="skill-info-popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p id="skill-info-text"></p>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <span id="contact-email"></span></p>
+        <!-- <p>Phone: <span id="contact-phone"></span></p> -->
+        <h3>Follow Me:</h3>
+        <div id="social-media-links"></div> <!-- Placeholder for social media links -->
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
