@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinayak Mali — AI/ML & Systems Engineer. M.Tech at IIT Kharagpur.">
+  <meta name="author" content="Vinayak Mali">
+  <meta name="theme-color" content="#050816">
+  <title>Vinayak Mali — AI/ML & Systems Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" id="nav-logo" aria-label="Home">
+        <!-- <span class="logo-bracket">&lt;</span> -->
+        <img src="images/profile.png" alt="malivinayak" class="logo-avatar">
+        <!-- <span class="logo-bracket">/&gt;</span> -->
+      </a>
+
+      <ul class="nav-links" id="nav-links" role="menubar"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" type="button">
+          <span class="theme-icon" id="theme-icon"></span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <ul class="mobile-nav-links" id="mobile-nav-links" role="menu"></ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- HERO -->
+    <section id="hero" class="section hero-section">
+      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-badge"></div>
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-subtitle" id="hero-subtitle"></p>
+        <div class="hero-ctas" id="hero-ctas"></div>
+        <div class="hero-stats" id="hero-stats"></div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section section--about">
+      <canvas class="section-canvas" data-effect="grid" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="About Me">About Me</h2>
+        <div class="about-grid" id="about-content"></div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section section--skills">
+      <canvas class="section-canvas" data-effect="wave" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Skills & Technologies">Skills & Technologies</h2>
+        <div class="skills-grid" id="skills-content"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section section--projects">
+      <canvas class="section-canvas" data-effect="constellation" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Featured Projects">Featured Projects</h2>
+        <div class="projects-toolbar" id="projects-toolbar"></div>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section section--experience">
+      <canvas class="section-canvas" data-effect="matrix" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Experience">Experience</h2>
+        <div class="experience-content" id="experience-content"></div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section section--education">
+      <canvas class="section-canvas" data-effect="particles" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Education">Education</h2>
+        <div class="education-timeline" id="education-timeline"></div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="section section--blog">
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Blog">Blog</h2>
+        <div class="blog-grid" id="blog-grid"></div>
+        <div class="blog-cta" id="blog-cta"></div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section section--achievements">
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Achievements">Achievements</h2>
+        <div class="achievements-grid" id="achievements-grid"></div>
+        <button class="show-more-btn" id="achievements-toggle" type="button" style="display:none;">Show More</button>
+      </div>
+    </section>
+
+    <!-- COURSEWORK -->
+    <section id="coursework" class="section section--coursework">
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Coursework">Coursework</h2>
+        <div class="coursework-grid" id="coursework-grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--contact">
+      <canvas class="section-canvas" data-effect="aurora" aria-hidden="true"></canvas>
+      <div class="container">
+        <h2 class="section-heading glitch-heading" data-text="Get in Touch">Get in Touch</h2>
+        <div class="contact-grid" id="contact-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+
+  <!-- Project Modal -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+    <div class="modal-content" id="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close" type="button">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

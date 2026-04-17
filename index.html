@@ -1,164 +1,451 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vinayak Mali — AI/ML & Systems Engineer. M.Tech at IIT Kharagpur.">
-  <meta name="author" content="Vinayak Mali">
-  <meta name="theme-color" content="#050816">
-  <title>Vinayak Mali — AI/ML & Systems Engineer</title>
+  <meta name="description" content="Vinayak Mali · The Grove — a living portfolio. M.Tech AI @ IIT Kharagpur. AI/ML, systems engineering, full-stack.">
+  <title>Vinayak Mali · The Grove</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Crimson+Pro:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    // Prevent FOUC: set theme before CSS paints.
+    (function () {
+      try {
+        var stored = localStorage.getItem('grove-theme');
+        if (stored === 'day' || stored === 'night') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else {
+          var h = new Date().getHours();
+          document.documentElement.setAttribute('data-theme', (h < 6 || h > 19) ? 'night' : 'day');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'day');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E🌿%3C/text%3E%3C/svg%3E">
 </head>
-
 <body>
-  <!-- Custom cursor -->
-  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
-  <!-- Navbar -->
-  <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo" id="nav-logo" aria-label="Home">
-        <!-- <span class="logo-bracket">&lt;</span> -->
-        <img src="images/profile.png" alt="malivinayak" class="logo-avatar">
-        <!-- <span class="logo-bracket">/&gt;</span> -->
-      </a>
+  <!-- ╔════════════════ LIVING BACKGROUND ════════════════╗ -->
+  <div class="scene" aria-hidden="true">
+    <!-- Sky gradient -->
+    <div class="sky-wash"></div>
 
-      <ul class="nav-links" id="nav-links" role="menubar"></ul>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" type="button">
-          <span class="theme-icon" id="theme-icon"></span>
-        </button>
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+    <!-- Celestial body (sun/moon morphs via CSS) -->
+    <div class="celestial">
+      <div class="celestial-body"></div>
+      <div class="celestial-glow"></div>
     </div>
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-      <ul class="mobile-nav-links" id="mobile-nav-links" role="menu"></ul>
-    </div>
+
+    <!-- Stars (only visible at night) -->
+    <svg class="stars-layer" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"></svg>
+
+    <!-- Mountain parallax -->
+    <svg class="mountains far" viewBox="0 0 1600 600" preserveAspectRatio="xMidYEnd slice">
+      <path d="M0,600 L0,420 L120,300 L260,380 L400,240 L560,340 L720,260 L880,330 L1040,220 L1200,310 L1360,280 L1500,350 L1600,320 L1600,600 Z"/>
+    </svg>
+    <svg class="mountains mid" viewBox="0 0 1600 600" preserveAspectRatio="xMidYEnd slice">
+      <path d="M0,600 L0,480 L180,360 L340,440 L500,320 L680,400 L840,340 L1020,420 L1180,360 L1340,400 L1500,380 L1600,420 L1600,600 Z"/>
+    </svg>
+
+    <!-- Far forest silhouette -->
+    <svg class="trees far" viewBox="0 0 1600 300" preserveAspectRatio="xMidYEnd slice">
+      <g class="tree-cluster"></g>
+    </svg>
+
+    <!-- Near forest silhouette -->
+    <svg class="trees near" viewBox="0 0 1600 400" preserveAspectRatio="xMidYEnd slice">
+      <g class="tree-cluster"></g>
+    </svg>
+
+    <!-- Particle canvas (leaves/fireflies) -->
+    <canvas id="particles"></canvas>
+
+    <!-- Atmospheric fog -->
+    <div class="fog"></div>
+
+    <!-- Grain overlay -->
+    <div class="grain"></div>
+  </div>
+
+  <!-- ╔════════════════ FIREFLY CURSOR ════════════════╗ -->
+  <div class="firefly-cursor" aria-hidden="true"></div>
+
+  <!-- ╔════════════════ NAVIGATION ════════════════╗ -->
+  <nav class="nav">
+    <a href="#hero" class="nav-brand">
+      <svg class="brand-leaf" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M12 2 C6 6 3 12 4 18 C4 20 6 22 8 22 C12 22 20 18 22 8 C22 6 20 4 18 4 C14 4 12 2 12 2 Z" fill="currentColor"/>
+        <path d="M12 2 C10 8 8 14 8 22" stroke="var(--bark)" stroke-width="0.6" fill="none" opacity="0.4"/>
+      </svg>
+      <span>vinayak<span class="brand-dot">.</span>mali</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">roots</a></li>
+      <li><a href="#skills">canopy</a></li>
+      <li><a href="#projects">garden</a></li>
+      <li><a href="#experience">rings</a></li>
+      <li><a href="#blog">leaves</a></li>
+      <li><a href="#achievements">stars</a></li>
+      <li><a href="#contact">pond</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle day/night">
+      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <line x1="12" y1="2" x2="12" y2="5"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="5" y2="12"/>
+          <line x1="19" y1="12" x2="22" y2="12"/>
+          <line x1="4.9" y1="4.9" x2="7" y2="7"/>
+          <line x1="17" y1="17" x2="19.1" y2="19.1"/>
+          <line x1="4.9" y1="19.1" x2="7" y2="17"/>
+          <line x1="17" y1="7" x2="19.1" y2="4.9"/>
+        </g>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18">
+        <path d="M20 14.5 A8 8 0 1 1 9.5 4 A6.5 6.5 0 0 0 20 14.5 Z" fill="currentColor"/>
+      </svg>
+    </button>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <main id="main-content">
-    <!-- HERO -->
-    <section id="hero" class="section hero-section">
-      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-content">
-        <div class="hero-badge" id="hero-badge"></div>
-        <h1 class="hero-title" id="hero-title"></h1>
-        <p class="hero-subtitle" id="hero-subtitle"></p>
-        <div class="hero-ctas" id="hero-ctas"></div>
-        <div class="hero-stats" id="hero-stats"></div>
-      </div>
-      <div class="scroll-indicator" aria-hidden="true">
-        <div class="scroll-mouse">
-          <div class="scroll-wheel"></div>
+  <main>
+
+    <!-- ╔════════════════ HERO / SEED ════════════════╗ -->
+    <section id="hero" class="hero">
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>M.Tech in AI · IIT Kharagpur</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-line">
+            <span class="word" style="--d:0">Vinayak</span>
+            <span class="word" style="--d:1">Mali</span>
+          </span>
+          <span class="hero-sub">
+            <em>builds</em> intelligent systems <br>
+            at the <span class="hero-mark">intersection</span> of <br>
+            <span class="rotating-role">
+              <span>AI &amp; Machine Learning</span>
+              <span>Systems Engineering</span>
+              <span>Full-Stack Development</span>
+            </span>
+          </span>
+        </h1>
+
+        <p class="hero-lede">
+          A living portfolio · scroll to wander through the grove — from <a href="#about">roots</a> to <a href="#skills">canopy</a>, through the <a href="#projects">garden</a>, past the <a href="#experience">tree rings</a>, to the quiet <a href="#contact">pond</a>.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#projects" class="cta cta-primary">
+            <span>Enter the garden</span>
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://blog.malivinayak.com/" target="_blank" rel="noopener" class="cta cta-ghost">
+            <span>Read field notes</span>
+            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M7 17 L17 7 M10 7 H17 V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-value">AIR 716</span>
+            <span class="stat-label">GATE 2024 · 99.36%ile</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value">8.45<small>/10</small></span>
+            <span class="stat-label">CGPA · IIT KGP</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value">33<small>+</small></span>
+            <span class="stat-label">Open-source repos</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value">2024–26</span>
+            <span class="stat-label">M.Tech AI</span>
+          </div>
+        </div>
+
+        <div class="scroll-prompt">
+          <span>wander downward</span>
+          <svg viewBox="0 0 24 40" width="14" height="24"><path d="M12 2 L12 30 M5 22 L12 30 L19 22" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section section--about">
-      <canvas class="section-canvas" data-effect="grid" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="About Me">About Me</h2>
-        <div class="about-grid" id="about-content"></div>
+    <!-- ╔════════════════ ABOUT / ROOTS ════════════════╗ -->
+    <section id="about" class="roots-section">
+      <div class="section-mark">
+        <span class="mark-num">01</span>
+        <span class="mark-label">the roots</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <div class="roots-grid">
+        <div class="roots-text">
+          <h2 class="section-title">Where the <em>roots</em> run deep.</h2>
+          <p class="prose">
+            M.Tech student at <strong>IIT Kharagpur</strong> specializing in Artificial Intelligence, with a strong foundation in computer science and hands-on experience across <strong>machine learning, computer vision, systems programming, and full-stack development</strong>. I build solutions that are technically rigorous and practically impactful — from cache simulators and traffic micro-simulation to AI-powered recommendation engines.
+          </p>
+          <p class="prose-quiet">
+            I like problems that sit at the seam between theory and machinery — where a careful algorithm meets a noisy real system, and something useful grows.
+          </p>
+        </div>
+
+        <div class="roots-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">🧠</div>
+            <h3>AI &amp; ML Research</h3>
+            <p>Deep learning, computer vision, graph ML, surrogate models</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">⚙︎</div>
+            <h3>Systems Engineering</h3>
+            <p>Cache simulation, OS internals, performance</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">◉</div>
+            <h3>Full-Stack Development</h3>
+            <p>React, Node, databases, cloud deployment</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">✦</div>
+            <h3>Competitive Achiever</h3>
+            <p>GATE AIR 716 · top hackathon finishes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative roots SVG -->
+      <svg class="roots-decor" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <path d="M600 0 Q600 50 580 80 Q550 110 540 160 Q530 190 500 200"/>
+          <path d="M600 0 Q600 40 620 70 Q660 100 680 140 Q700 170 720 200"/>
+          <path d="M600 0 Q600 30 570 50 Q520 70 480 100 Q430 140 400 200"/>
+          <path d="M600 0 Q600 40 650 60 Q720 90 780 130 Q840 170 880 200"/>
+          <path d="M600 0 Q600 20 600 60 Q600 120 600 200"/>
+          <path d="M540 160 Q510 175 490 200"/>
+          <path d="M680 140 Q710 170 740 200"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- ╔════════════════ SKILLS / CANOPY ════════════════╗ -->
+    <section id="skills" class="canopy-section">
+      <div class="section-mark">
+        <span class="mark-num">02</span>
+        <span class="mark-label">the canopy</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title centered">What the <em>canopy</em> holds.</h2>
+      <p class="section-sub">Three branches, many leaves — click a branch to illuminate its leaves.</p>
+
+      <div class="canopy-wrap">
+        <!-- Interactive tree SVG -->
+        <svg class="skill-tree" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <!-- Trunk -->
+          <path d="M400 600 C400 500, 390 450, 400 380 C405 340, 395 310, 400 250" stroke="currentColor" class="trunk" stroke-width="14" fill="none" stroke-linecap="round"/>
+
+          <!-- Branch: Languages (left) -->
+          <path d="M400 380 Q320 340 220 310 Q160 290 110 280" class="branch" data-branch="0" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <!-- Branch: AI/ML (top) -->
+          <path d="M400 280 Q420 210 430 150 Q440 100 460 70" class="branch" data-branch="1" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <!-- Branch: Tools (right) -->
+          <path d="M400 360 Q500 330 600 310 Q660 300 710 290" class="branch" data-branch="2" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+          <!-- Leaf groups (populated by JS) -->
+          <g class="leaves-group" data-branch="0"></g>
+          <g class="leaves-group" data-branch="1"></g>
+          <g class="leaves-group" data-branch="2"></g>
+        </svg>
+
+        <!-- Branch legend / controls -->
+        <div class="branch-legend" id="branchLegend"></div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section section--skills">
-      <canvas class="section-canvas" data-effect="wave" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Skills & Technologies">Skills & Technologies</h2>
-        <div class="skills-grid" id="skills-content"></div>
+    <!-- ╔════════════════ PROJECTS / GARDEN ════════════════╗ -->
+    <section id="projects" class="garden-section">
+      <div class="section-mark">
+        <span class="mark-num">03</span>
+        <span class="mark-label">the garden</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title">Seven plants in the <em>garden</em>.</h2>
+      <p class="section-sub">Each bloom a project. Hover to watch it open. Click for its full anatomy.</p>
+
+      <div class="garden-filters" id="gardenFilters"></div>
+
+      <div class="garden-grid" id="gardenGrid"></div>
+    </section>
+
+    <!-- ╔════════════════ EXPERIENCE / RINGS ════════════════╗ -->
+    <section id="experience" class="rings-section">
+      <div class="section-mark">
+        <span class="mark-num">04</span>
+        <span class="mark-label">the rings</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title centered">Growth, counted in <em>rings</em>.</h2>
+      <p class="section-sub">A cross-section of experience — each ring a role.</p>
+
+      <div class="rings-layout">
+        <!-- Tree rings visualization -->
+        <div class="tree-slice">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <defs>
+              <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--sun)" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="var(--bark)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="190" fill="url(#ringGrad)"/>
+            <circle cx="200" cy="200" r="180" class="ring" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+            <circle cx="200" cy="200" r="150" class="ring active" data-ring="0" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="200" cy="200" r="110" class="ring active" data-ring="1" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="200" cy="200" r="70" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <circle cx="200" cy="200" r="30" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+            <circle cx="200" cy="200" r="6" fill="currentColor"/>
+            <!-- Texture cracks -->
+            <g stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.2">
+              <path d="M200 200 L120 80"/>
+              <path d="M200 200 L290 90"/>
+              <path d="M200 200 L340 260"/>
+              <path d="M200 200 L70 280"/>
+              <path d="M200 200 L160 350"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="rings-list" id="ringsList"></div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section section--projects">
-      <canvas class="section-canvas" data-effect="constellation" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Featured Projects">Featured Projects</h2>
-        <div class="projects-toolbar" id="projects-toolbar"></div>
-        <div class="projects-grid" id="projects-grid"></div>
+    <!-- ╔════════════════ EDUCATION / SAPLING ════════════════╗ -->
+    <section id="education" class="sapling-section">
+      <div class="section-mark">
+        <span class="mark-num">05</span>
+        <span class="mark-label">how it grew</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title">From seed to <em>sapling</em>.</h2>
+
+      <div class="education-flow" id="educationFlow"></div>
+
+      <div class="coursework-box">
+        <h3>What was studied in the shade</h3>
+        <div class="coursework-grid" id="courseworkGrid"></div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section section--experience">
-      <canvas class="section-canvas" data-effect="matrix" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Experience">Experience</h2>
-        <div class="experience-content" id="experience-content"></div>
+    <!-- ╔════════════════ BLOG / FALLEN LEAVES ════════════════╗ -->
+    <section id="blog" class="leaves-section">
+      <div class="section-mark">
+        <span class="mark-num">06</span>
+        <span class="mark-label">fallen leaves</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title">Thoughts caught by the <em>wind</em>.</h2>
+      <p class="section-sub">Field notes, essays, and half-finished theories.</p>
+
+      <div class="leaves-grid" id="leavesGrid"></div>
+
+      <a href="https://blog.malivinayak.com/" target="_blank" rel="noopener" class="cta cta-ghost cta-centered">
+        <span>Visit the whole notebook</span>
+        <svg viewBox="0 0 24 24" width="14" height="14"><path d="M7 17 L17 7 M10 7 H17 V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- ╔════════════════ ACHIEVEMENTS / CONSTELLATIONS ════════════════╗ -->
+    <section id="achievements" class="stars-section">
+      <div class="section-mark light">
+        <span class="mark-num">07</span>
+        <span class="mark-label">constellations</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title light centered">Small <em>constellations</em> above.</h2>
+      <p class="section-sub light">Click the stars — each one remembers a milestone.</p>
+
+      <div class="constellation-wrap">
+        <svg class="constellation" viewBox="0 0 1000 500" aria-hidden="true" id="constellation"></svg>
+        <div class="constellation-caption" id="constellationCaption">Hover or tap a star to read its story.</div>
       </div>
     </section>
 
-    <!-- EDUCATION -->
-    <section id="education" class="section section--education">
-      <canvas class="section-canvas" data-effect="particles" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Education">Education</h2>
-        <div class="education-timeline" id="education-timeline"></div>
+    <!-- ╔════════════════ CONTACT / POND ════════════════╗ -->
+    <section id="contact" class="pond-section">
+      <div class="section-mark">
+        <span class="mark-num">08</span>
+        <span class="mark-label">the pond</span>
+        <svg class="mark-flourish" viewBox="0 0 60 10" width="60" height="10"><path d="M0 5 Q15 0 30 5 T60 5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+
+      <h2 class="section-title">Drop a stone in the <em>pond</em>.</h2>
+      <p class="section-sub">I read every ripple. Pick any of the channels below.</p>
+
+      <div class="pond" id="pond">
+        <canvas id="pondCanvas"></canvas>
+        <div class="pond-reflection">
+          <div class="contact-card">
+            <div class="contact-primary">
+              <span class="contact-label">email</span>
+              <button class="contact-email" id="emailBtn" data-email="malivinayak012@gmail.com">
+                <span>malivinayak012@gmail.com</span>
+                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M8 4 H18 V14 M18 4 L8 14 M4 8 V20 H16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="contact-channels" id="contactChannels"></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- BLOG -->
-    <section id="blog" class="section section--blog">
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Blog">Blog</h2>
-        <div class="blog-grid" id="blog-grid"></div>
-        <div class="blog-cta" id="blog-cta"></div>
-      </div>
-    </section>
-
-    <!-- ACHIEVEMENTS -->
-    <section id="achievements" class="section section--achievements">
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Achievements">Achievements</h2>
-        <div class="achievements-grid" id="achievements-grid"></div>
-        <button class="show-more-btn" id="achievements-toggle" type="button" style="display:none;">Show More</button>
-      </div>
-    </section>
-
-    <!-- COURSEWORK -->
-    <section id="coursework" class="section section--coursework">
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Coursework">Coursework</h2>
-        <div class="coursework-grid" id="coursework-grid"></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section section--contact">
-      <canvas class="section-canvas" data-effect="aurora" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="section-heading glitch-heading" data-text="Get in Touch">Get in Touch</h2>
-        <div class="contact-grid" id="contact-grid"></div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer" id="footer"></footer>
-
-  <!-- Project Modal -->
-  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
-    <div class="modal-content" id="modal-content">
-      <button class="modal-close" id="modal-close" aria-label="Close" type="button">&times;</button>
-      <div id="modal-body"></div>
+  <!-- ╔════════════════ PROJECT MODAL ════════════════╗ -->
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
 
-  <!-- Toast -->
-  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <!-- ╔════════════════ FOOTER ════════════════╗ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-leaf" viewBox="0 0 24 24" width="20" height="20"><path d="M12 2 C6 6 3 12 4 18 C4 20 6 22 8 22 C12 22 20 18 22 8 C22 6 20 4 18 4 C14 4 12 2 12 2 Z" fill="currentColor"/></svg>
+        <span>The Grove · Vinayak Mali · <span id="year"></span></span>
+      </div>
+      <div class="footer-motto">
+        Grown by hand with HTML, CSS &amp; a little botanical patience.
+      </div>
+    </div>
+  </footer>
 
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
