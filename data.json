@@ -1,0 +1,78 @@
+{
+  "profile": {
+    "name": "Vinayak Mali",
+    "tagline": "Building intelligent systems at the intersection of AI, systems engineering, and software.",
+    "badge": "M.Tech in AI @ IIT Kharagpur",
+    "roles": ["AI & Machine Learning", "Systems Engineering", "Full-Stack Development"],
+    "stats": [
+      { "value": "AIR 716", "label": "GATE 2024 · 99.36%ile" },
+      { "value": "8.45/10", "label": "CGPA · IIT KGP" },
+      { "value": "33+", "label": "Open-source repos" },
+      { "value": "2024–26", "label": "M.Tech AI" }
+    ]
+  },
+  "skills": [
+    { "category": "Programming Languages", "icon": "⌨", "items": ["Python","C++","C","Java","JavaScript","TypeScript","SQL"] },
+    { "category": "AI / ML & Core CS",     "icon": "⚘", "items": ["PyTorch","TensorFlow","Scikit-learn","MediaPipe","LangChain","Computer Vision","NLP","Graph ML","Reinforcement Learning","Deep Learning"] },
+    { "category": "Tools & Frameworks",    "icon": "✦", "items": ["React","Node.js","Express","Flask","Git","Docker","Firebase","Oracle DB","MySQL","MongoDB","Tailwind CSS","Linux"] }
+  ],
+  "projects": [
+    { "id":"cachesim", "title":"CacheSim", "timeline":"2025", "hook":"High-fidelity cache simulator modeling L1/L2 hierarchies with configurable policies and performance metrics.", "tags":["C++","Systems","Cache","Architecture"], "filters":["Systems"], "github":"https://github.com/malivinayak/CacheSim", "demo":null, "icon":"⚡", "particle":"metal",
+      "modal":{"bullets":["Simulates L1/L2 cache hierarchies with LRU, FIFO, and LFU replacement policies","Configurable cache size, block size, and associativity parameters","Detailed hit/miss rate analysis with cycle-accurate timing","Benchmarked against standard memory traces for validation"],"architecture":"Modular C++ design with templated cache levels, trace parser, and stats engine. Supports unified and split I/D cache.","stack":["C++","Make","Memory Traces","Computer Architecture"]}},
+    { "id":"smartrecall", "title":"SmartRecall — Movie Recommender", "timeline":"2023", "hook":"Content-based movie recommendation engine analyzing 5,000+ films via NLP similarity.", "tags":["Python","ML","NLP","Streamlit"], "filters":["AI/ML"], "github":null, "demo":"https://www.youtube.com/watch?v=q1B7qrYaqpU", "icon":"🎬", "particle":"wind",
+      "modal":{"bullets":["Content-based filtering using bag-of-words and cosine similarity on TMDB 5000 dataset","Feature vectors from genres, cast, crew, and overview metadata","Interactive Streamlit UI with poster display and instant recommendations","Relevant top-5 suggestions across diverse genre preferences"],"architecture":"Pandas preprocessing → Scikit-learn CountVectorizer → cosine similarity matrix → Streamlit + TMDB API.","stack":["Python","Scikit-learn","Pandas","Streamlit","TMDB API"]}},
+    { "id":"shadowprompt", "title":"ShadowPrompt", "timeline":"2024", "hook":"Security research framework exploring prompt injection and adversarial attacks on LLM systems.", "tags":["Python","LLM","Security","Prompt Eng."], "filters":["AI/ML","Security"], "github":"https://github.com/malivinayak/ShadowPrompt", "demo":null, "icon":"🛡", "particle":"smoke",
+      "modal":{"bullets":["Framework for testing LLM robustness against prompt injection vectors","Classified common adversarial prompt patterns and attack surfaces","Tested across multiple LLM providers to evaluate safety mechanisms","Findings to inform safer AI system design"],"architecture":"Python test harness with configurable attack templates, response analysis pipeline, and automated vulnerability scoring.","stack":["Python","LangChain","OpenAI API","AI Safety"]}},
+    { "id":"mtp-traffic", "title":"ML Surrogates for Traffic Simulation", "timeline":"2025 · M.Tech Thesis", "hook":"Neural surrogates replacing expensive SUMO traffic micro-simulations with 50x+ speedup.", "tags":["Python","PyTorch","SUMO","Surrogate"], "filters":["AI/ML","Systems"], "github":null, "demo":null, "icon":"🚦", "particle":"fire",
+      "modal":{"bullets":["Neural network surrogates approximating SUMO micro-simulation outputs","50x+ speedup over traditional simulation with minimal accuracy loss","Feature engineering from intersection geometry, signal timing, and flow data","M.Tech thesis project at IIT Kharagpur"],"architecture":"SUMO simulation → data pipeline → feature engineering → PyTorch neural surrogate → validation.","stack":["Python","PyTorch","SUMO","Pandas","NumPy"]}},
+    { "id":"taxi-mgmt", "title":"Trip & Taxi Management System", "timeline":"2022", "hook":"Full-stack web app with booking, wallet, rewards, and driver management on Oracle DB.", "tags":["Express.js","Oracle DB","Node.js"], "filters":["Web","DB"], "github":"https://github.com/malivinayak/Taxi-Management-System", "demo":null, "icon":"🚕", "particle":"wind",
+      "modal":{"bullets":["User and driver registration with role-based access","Real-time trip booking with fare calculation and dynamic status","Wallet system for payments and driver reward accumulation","Oracle DB schema with triggers, procedures, and optimized queries"],"architecture":"Express.js REST API → Oracle DB with PL/SQL → Bootstrap frontend with AJAX.","stack":["Node.js","Express.js","Oracle DB","PL/SQL","Bootstrap"]}},
+    { "id":"fall-detection", "title":"Pose-Based Fall Detection", "timeline":"2023", "hook":"Real-time fall detection using MediaPipe pose estimation — 91.5% accuracy on standard CPUs.", "tags":["Python","MediaPipe","CV","ML"], "filters":["AI/ML"], "github":null, "demo":"https://arxiv.org/pdf/2503.19501", "icon":"🏃", "particle":"smoke",
+      "modal":{"bullets":["Real-time fall detection via MediaPipe pose landmark extraction","Custom voting mechanism combining multiple classifiers","91.54% accuracy without GPU on standard hardware","Applicable to elderly care and workplace safety"],"architecture":"Video → MediaPipe pose → feature engineering (angles, velocities) → ensemble classifier → alert system.","stack":["Python","MediaPipe","Scikit-learn","OpenCV"]}},
+    { "id":"nextsquare", "title":"NextSquare Company Website", "timeline":"2023", "hook":"Production company website — React, 20% load time cut, 99.9% uptime on Hostinger VPS.", "tags":["React","Tailwind","Node.js","VPS"], "filters":["Web"], "github":null, "demo":"https://nextsquare.malivinayak.com/", "icon":"🌐", "particle":"metal",
+      "modal":{"bullets":["Responsive, SEO-optimized company site during internship","20% load time reduction via lazy loading and code splitting","Deployed on Hostinger VPS + Nginx with 99.9% uptime","Mobile-first design with smooth animations"],"architecture":"React SPA → Tailwind CSS → Node.js backend → Nginx on Hostinger VPS.","stack":["React","Tailwind CSS","Node.js","Nginx"]}}
+  ],
+  "projectFilters": ["All", "AI/ML", "Systems", "Web", "DB", "Security"],
+  "experience": [
+    { "role":"Teaching Assistant — Machine Learning", "company":"IIT Kharagpur, Department of AI", "period":"Jul 2025 – Present",
+      "bullets":["Assisted with coursework and labs for graduate Machine Learning","Mentored students on assignments, projects, and doubt sessions"], "link":null },
+    { "role":"Software Engineer Intern", "company":"NextSquare Technologies, Pune", "period":"Jan 2023 – Jul 2023",
+      "bullets":["Built and deployed the company's responsive website using React and Tailwind CSS","Optimized backend performance, reducing page load times by 20%","Deployed on Hostinger VPS with Nginx, achieving 99.9% uptime","Integrated real-time Firebase features and enhanced overall UX"],
+      "link":{"label":"View live work","url":"https://nextsquare.malivinayak.com/"} }
+  ],
+  "education": [
+    { "degree":"M.Tech in Artificial Intelligence", "institute":"Indian Institute of Technology (IIT) Kharagpur", "year":"2024 – 2026", "score":"CGPA · 8.45 / 10" },
+    { "degree":"B.Tech in Computer Science & Engineering", "institute":"Kolhapur Institute of Technology's College of Engineering", "year":"2019 – 2023", "score":"CGPA · 8.67 / 10" }
+  ],
+  "coursework": [
+    { "group":"AI / Machine Learning", "items":["Machine Learning","Deep Learning","Visual Computing","Graph Machine Learning","Natural Language Processing","Reinforcement Learning"] },
+    { "group":"Computer Science Core", "items":["Data Structures & Algorithms","Operating Systems","Computer Networks","Database Management Systems","Computer Architecture","Software Engineering"] }
+  ],
+  "blogs": [
+    { "title":"GenAI-1: What is a Language Model?", "teaser":"We all heard about LLMs (Large Language Models) — but before understanding LLMs, what exactly is a language model?", "tags":["AI","GenAI","LLM"], "date":"Sep 18, 2025", "url":"https://blog.malivinayak.com/genai-1-what-is-a-language-model" },
+    { "title":"Adventures Journey of Question and Answer", "teaser":"Lets start the learning journey with every post: one question, one answer — a simple way to grow consistently.", "tags":["AI","ML","GenAI"], "date":"Sep 18, 2025", "url":"https://blog.malivinayak.com/adventures-journey-of-question-and-answer" },
+    { "title":"How to install conda in Ubuntu", "teaser":"Install Miniconda on Ubuntu and set up conda quickly (wget installer → bash install → initialize shell).", "tags":["Ubuntu","Conda","Setup"], "date":"Aug 18, 2025", "url":"https://blog.malivinayak.com/how-to-install-conda-in-ubuntu" },
+    { "title":"Journey of Compiler", "teaser":"A beginner-friendly tour of compiler design — why compilers exist, and how the compilation pipeline works end-to-end.", "tags":["Compilers","CS"], "date":"Apr 16, 2024", "url":"https://blog.malivinayak.com/journey-of-compiler" },
+    { "title":"Characteristics of C Programming", "teaser":"Six core characteristics: keywords, operators, separators, constants, predefined functions, and syntax.", "tags":["C","Programming"], "date":"Oct 9, 2023", "url":"https://blog.malivinayak.com/characteristics-of-c-programming" }
+  ],
+  "achievements": [
+    { "icon":"🏅", "text":"GATE 2024 — AIR 716, 99.36 Percentile (CS/IT)" },
+    { "icon":"🎓", "text":"M.Tech Admission — IIT Kharagpur, AI Specialization" },
+    { "icon":"🥇", "text":"Excellent (Top 15%) — CTB Design Verification Hackathon, IIT Madras" },
+    { "icon":"🥇", "text":"Excellent (Top 15%) — Mixed Signal Marathon, IIT Bombay" },
+    { "icon":"💻", "text":"200+ problems solved on LeetCode and coding platforms" },
+    { "icon":"🌟", "text":"Shipped production website with 99.9% uptime at NextSquare" },
+    { "icon":"📝", "text":"Published technical blog posts on programming and systems" },
+    { "icon":"🔓", "text":"Open-source contributor — 33+ public GitHub repos" }
+  ],
+  "contact": {
+    "email": "malivinayak012@gmail.com",
+    "links": [
+      { "icon":"✉", "label":"Email",    "url":"mailto:malivinayak012@gmail.com" },
+      { "icon":"in", "label":"LinkedIn", "url":"https://www.linkedin.com/in/malivinayak/" },
+      { "icon":"gh", "label":"GitHub",   "url":"https://github.com/malivinayak" },
+      { "icon":"◉", "label":"Website",  "url":"https://malivinayak.com/" },
+      { "icon":"✎", "label":"Blog",     "url":"https://blog.malivinayak.com/" }
+    ]
+  }
+}
